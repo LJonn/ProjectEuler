@@ -5,7 +5,7 @@ limit = 1000
 def isPrime(number):
     if (number < 0):
         return False
-    for x in range(2, int(number**(1/2))):
+    for x in range(2, int(number**(1/2)) + 1):
         if (number % x == 0):
             return False
     return True
