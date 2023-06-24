@@ -8,17 +8,6 @@ def is_prime(num):
             return False
     return True
 
-def is_pandigital(num):
-    num_set = set()
-    num_str = str(num)
-    if ("0" in num_str):
-        return False
-    for i in num_str:
-        num_set.add(int(i))
-    if (len(num_str)==len(num_set) and max(num_set)==len(num_str)):
-        return True
-    return False
-
 def permutate(num):
     numList = []
     digits = [int(digit) for digit in str(num)]
