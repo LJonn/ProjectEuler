@@ -53,9 +53,8 @@ def numToList(num):
     return list(reversed(result))
 
 
-def applyTemplate(num, template):
+def applyTemplate(nums, template):
     result = []
-    nums = numToList(num)
     for i, n in enumerate(nums):
         if (template[i] == "*"):
             result.append("*")
@@ -64,14 +63,28 @@ def applyTemplate(num, template):
     return result
 
 
+def isLowestTemplate(digits, template):
+    minNum = 0
+    if type(template[0]) == str:
+        minNum = 1
+    for i, digit in enumerate(digits):
+        if template[i] == "*":
+            if (digit != minNum):
+                return False
+    return True
+
+
 primeNumber = 7
 finished = False
 while (not finished):
     primeNumber = nextPrime(primeNumber)
     length = len(numToList(primeNumber))
-    for template in list(itertools.product('*C', repeat=length)):
-        if ("*" in template):
-            templated = applyTemplate(primeNumber, template)
+    templates = list(itertools.product('*C', repeat=length))
+    templates = templates[:-1]
+    for template in templates:
+        numDigits = numToList(primeNumber)
+        if (isLowestTemplate(numDigits, template)):
+            templated = applyTemplate(numDigits, template)
             if (numberOfPrimes(templated)) == 8:
                 print(primeNumber, template)
                 finished = True
